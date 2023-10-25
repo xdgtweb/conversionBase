@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Conversiones de base numérica</title>
+    <style>
+        .container {
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+        }
+
+        .section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        p,
+        input,
+        span {
+            width: 50%;
+        }
+
+        @media(max-width: 768px) {
+
+            .container {
+                max-width: 90%;
+            }
+
+            p,
+            input,
+            span {
+                width: 90%;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Conversiones de base numérica</h1>
+
+    <h1>Cristiand Company</h1>
+
+    <h2>Binario a decimal</h2>
+
+    <p>Binario: <input type="text" id="binario"></p>
+
+    <p>Decimal: <span id="decimal1"></span></p>
+
+    <p id="proceso1"></p>
+
+    <h2>Decimal a binario</h2>
+
+    <p>Decimal: <input type="text" id="decimal2"></p>
+
+    <p>Binario: <span id="binario2"></span></p>
+
+    <p id="proceso2"></p>
+
+    <h2>Decimal a hexadecimal</h2>
+
+    <p>Decimal: <input type="text" id="decimal3"></p>
+
+    <p>Hexadecimal: <span id="hexadecimal"></span></p>
+
+    <p id="proceso3"></p>
+
+    <h2>Hexadecimal a decimal</h2>
+
+    <p>Hexadecimal: <input type="text" id="hexadecimal2"></p>
+
+    <p>Decimal: <span id="decimal4"></span></p>
+
+    <p id="proceso4"></p>
+
+    <h2>Decimal a octal</h2>
+
+    <p>Decimal: <input type="text" id="decimal5"></p>
+
+    <p>Octal: <span id="octal"></span></p>
+
+    <p id="proceso5"></p>
+
+    <h2>Octal a decimal</h2>
+
+    <p>Octal: <input type="text" id="octal2"></p>
+
+    <p>Decimal: <span id="decimal6"></span></p>
+
+    <p id="proceso6"></p>
+
+    <script>
+        // Binario a Decimal
+        document.getElementById("binario").addEventListener("input", function () {
+            let binario = this.value;
+            let decimal = parseInt(binario, 2);
+            document.getElementById("decimal1").textContent = decimal;
+
+            let proceso = "Proceso: ";
+            for (let i = 0; i < binario.length; i++) {
+                proceso += binario[i] + " x 2^" + (binario.length - i - 1) + " + ";
+            }
+            proceso += " = " + decimal;
+
+            document.getElementById("proceso1").textContent = proceso;
+        });
+
+        // Decimal a Binario
+        document.getElementById("decimal2").addEventListener("input", function () {
+
+            let decimal = parseInt(this.value);
+            let binario = decimal.toString(2);
+
+            document.getElementById("binario2").textContent = binario;
+
+            let proceso = ""; // Inicializar proceso como string vacío
+            let residuo;
+            while (decimal > 0) {
+                residuo = decimal % 2;
+                decimal = Math.floor(decimal / 2);
+                proceso = residuo + proceso; // Concatenar residuo
+            }
+
+            document.getElementById("proceso2").textContent = proceso;
+        });
+
+        // Decimal a Hexadecimal  
+        document.getElementById("decimal3").addEventListener("input", function () {
+
+            let decimal = parseInt(this.value);
+            let hexadecimal = decimal.toString(16).toUpperCase();
+
+            document.getElementById("hexadecimal").textContent = hexadecimal;
+
+            let proceso = ""; // Inicializar proceso como string vacío
+            let residuo;
+            while (decimal > 0) {
+                residuo = decimal % 16;
+                decimal = Math.floor(decimal / 16);
+                proceso = residuo.toString(16).toUpperCase() + proceso;
+            }
+
+            document.getElementById("proceso3").textContent = proceso;
+        });
+
+        // Hexadecimal a Decimal
+        document.getElementById("hexadecimal2").addEventListener("input", function () {
+            let hexadecimal = this.value.toUpperCase();
+            let decimal = parseInt(hexadecimal, 16);
+
+            document.getElementById("decimal4").textContent = decimal;
+
+            let proceso = "Proceso: ";
+            for (let i = 0; i < hexadecimal.length; i++) {
+                proceso += hexadecimal[i] + " x 16^" + (hexadecimal.length - i - 1) + " + ";
+            }
+            proceso += " = " + decimal;
+
+            document.getElementById("proceso4").textContent = proceso;
+        });
+
+        // Decimal a Octal 
+        document.getElementById("decimal5").addEventListener("input", function () {
+            let decimal = parseInt(this.value);
+            let octal = decimal.toString(8);
+
+            document.getElementById("octal").textContent = octal;
+
+            let proceso = "Proceso: ";
+            let residuo;
+            while (decimal > 0) {
+                residuo = decimal % 8;
+                decimal = Math.floor(decimal / 8);
+                proceso = residuo + proceso;
+            }
+
+            document.getElementById("proceso5").textContent = proceso;
+        });
+
+        // Octal a Decimal
+        document.getElementById("octal2").addEventListener("input", function () {
+            let octal = this.value;
+            let decimal = parseInt(octal, 8);
+
+            document.getElementById("decimal6").textContent = decimal;
+
+            let proceso = "Proceso: ";
+            for (let i = 0; i < octal.length; i++) {
+                proceso += octal[i] + " x 8^" + (octal.length - i - 1) + " + ";
+            }
+            proceso += " = " + decimal;
+
+            document.getElementById("proceso6").textContent = proceso;
+        });
+    </script>
+
+</body>
+
+</html>
